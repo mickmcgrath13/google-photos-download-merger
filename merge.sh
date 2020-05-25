@@ -7,19 +7,19 @@ cd /home/tron/Projects/google-photos-download-merger
 
 
 ####### TESTING
-PHOTOS_ROOT="/media/tron/Seagate Expansion Drive/GooglePhotos/test_run"
-DEST_FOLDER="$PHOTOS_ROOT/test_merge_dist"
-LOG_FOLDER="$PHOTOS_ROOT/test_merge_log"
-SRC_FOLDER="test"
+# PHOTOS_ROOT="/media/tron/Seagate Expansion Drive/GooglePhotos/test_run"
+# DEST_FOLDER="$PHOTOS_ROOT/test_merge_dist"
+# LOG_FOLDER="$PHOTOS_ROOT/test_merge_log"
+# SRC_FOLDER="test"
 
 
 
 
 ####### FOR REALS
-# PHOTOS_ROOT="/media/tron/Seagate Expansion Drive/GooglePhotos/raw"
-# DEST_FOLDER="/media/tron/Seagate Expansion Drive/GooglePhotos/dist"
-# LOG_FOLDER="/media/tron/Seagate Expansion Drive/GooglePhotos/log"
-# SRC_FOLDER="takeout-20200509T174750Z-001"
+PHOTOS_ROOT="/media/tron/Seagate Expansion Drive/GooglePhotos"
+DEST_FOLDER="/media/tron/Seagate Expansion Drive/GooglePhotos/raw_merged"
+LOG_FOLDER="/media/tron/Seagate Expansion Drive/GooglePhotos/log_merged"
+SRC_FOLDER="raw"
 
 
 
@@ -32,9 +32,9 @@ SRC_FOLDER="test"
 
 if [ -n "$CLEAN_TEST" ]; then
 	echo "cleaning DEST_FOLDER: $DEST_FOLDER"
-	rm -rf "$DEST_FOLDER"/*
+	rm -rf "$DEST_FOLDER"
 	echo "cleaning LOG_FOLDER: $LOG_FOLDER"
-	rm -rf "$LOG_FOLDER"/*
+	rm -rf "$LOG_FOLDER"
 	exit 0
 fi
 
@@ -42,6 +42,16 @@ fi
 
 
 
+
+echo ""
+echo "Checkig if LOG_FOLDER exists ($LOG_FOLDER)"
+if [ -d "$LOG_FOLDER" ]; then
+  echo "   LOG_FOLDER exists"
+else
+  echo "   LOG_FOLDER does not exist.  Creating"
+  mkdir -p "$LOG_FOLDER"
+fi
+echo ""
 
 
 current_date_str=$(date +'%Y-%m-%d-%H%M%S')
